@@ -9,3 +9,8 @@ Arisu完成的GAMES101作业
 3. glew
 4. glfw
 5. opencv
+
+# 如果你不想用Linux又不想用Windows麻烦的环境配置
+我推荐你：[GAMES101-Premake](https://github.com/roeas/GAMES101-Premake)
+只适配Windows + VS2022
+如果你还不会用，我只能告诉你，先学一点电脑操作和计算机基础吧（
