@@ -1,6 +1,6 @@
 # GAMES101-ArisuDone
 Arisu完成的GAMES101作业
-* 当前进度：作业1
+* 当前进度：作业2 - SSAA抗锯齿 - over
 
 # 第三方库 ThirdParty
 1. eigen3
