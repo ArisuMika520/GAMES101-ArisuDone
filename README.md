@@ -2,12 +2,20 @@
 Arisu完成的GAMES101作业
 * 当前进度：作业2 - SSAA抗锯齿 - over
 
-# 第三方库 ThirdParty
-1. eigen3
-2. freetype
-3. glew
-4. glfw
-5. opencv
+# 结果
+
+### HomeWork 1
+<div align="center">
+  <img src="https://r2.sakinori.top/Image/HomeWork1.png" width="720" />
+</div>
+
+### HomeWork 2（SSAA ON）
+<div align="center">
+  <img src="https://r2.sakinori.top/Image/Homework2.png" width="720" />
+</div>
+
+
+
 
 ## 本项目不提供环境配置
 ## 本项目只是针对该作业的个人答案/写法
