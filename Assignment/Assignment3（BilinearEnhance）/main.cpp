@@ -119,7 +119,7 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
     Eigen::Vector3f return_color = {0, 0, 0};
     if (payload.texture)
     {
-        return_color = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y());
+        return_color = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y());
     }
     Eigen::Vector3f texture_color;
     texture_color << return_color.x(), return_color.y(), return_color.z();
@@ -150,14 +150,12 @@ Eigen::Vector3f texture_fragment_shader(const fragment_shader_payload& payload)
         Eigen::Vector3f l = light_dir.normalized();
         Eigen::Vector3f Ld = kd.cwiseProduct(light.intensity / r_squared) * MAX(0.0f, normal.normalized().dot(l));
 
-        Eigen::Vector3f La = ka.cwiseProduct(amb_light_intensity);
-
         Eigen::Vector3f v = (eye_pos - point).normalized();
         Eigen::Vector3f h = (l + v).normalized();
 
         Eigen::Vector3f Ls = ks.cwiseProduct(light.intensity / r_squared) * std::pow(MAX(0.0f, normal.normalized().dot(h)), p);
 
-        result_color += Ld + Ls + La;
+        result_color += Ld + Ls;
 
     }
 
@@ -242,9 +240,9 @@ Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payl
 
     float w = payload.texture->width;
     float h = payload.texture->height;
-    auto h_uv = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y()).x();
-    auto h_uwv = payload.texture->getColor(payload.tex_coords.x() + 1.0f / w, payload.tex_coords.y()).x();
-    auto h_uvh = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y() + 1.0f / h).x();
+    auto h_uv = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y()).x();
+    auto h_uwv = payload.texture->getColorBilinear(payload.tex_coords.x() + 1.0f / w, payload.tex_coords.y()).x();
+    auto h_uvh = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y() + 1.0f / h).x();
 
     float dU = kh * kn * (h_uwv - h_uv);
     float dV = kh * kn * (h_uvh - h_uv);
@@ -313,9 +311,9 @@ Eigen::Vector3f bump_fragment_shader(const fragment_shader_payload& payload)
 
     float w = payload.texture->width;
     float h = payload.texture->height;
-    auto h_uv = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y()).x();
-    auto h_uwv = payload.texture->getColor(payload.tex_coords.x() + 1.0f/w, payload.tex_coords.y()).x();
-    auto h_uvh = payload.texture->getColor(payload.tex_coords.x(), payload.tex_coords.y() + 1.0f/h).x();
+    auto h_uv = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y()).x();
+    auto h_uwv = payload.texture->getColorBilinear(payload.tex_coords.x() + 1.0f/w, payload.tex_coords.y()).x();
+    auto h_uvh = payload.texture->getColorBilinear(payload.tex_coords.x(), payload.tex_coords.y() + 1.0f/h).x();
 
     float dU = kh * kn * (h_uwv - h_uv);
     float dV = kh * kn * (h_uvh - h_uv);
