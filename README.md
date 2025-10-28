@@ -42,7 +42,7 @@ Arisu完成的GAMES101作业
 
 #### displacement shader
 <div align="center">
-  <img src="https://r2.sakinori.top/Image/HM3/output-bump.png" width="360" />
+  <img src="https://r2.sakinori.top/Image/HM3/output-displacement.png" width="360" />
 </div>
 
 
